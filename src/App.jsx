@@ -109,7 +109,7 @@ export default function App() {
     /* ── Prevenir duplicata ── */
     const normalizedName = name.trim().toLowerCase();
     if (rsvpList.some(r => r.name.toLowerCase() === normalizedName)) {
-      alert("Este nome já foi confirmado! Se precisar alterar algo, fale com a Luiza.");
+      alert("Esses nomes já foram confirmados! Se precisar alterar algo, fale com a Luiza.");
       return;
     }
 
@@ -245,6 +245,8 @@ export default function App() {
         .submit-btn{width:100%;margin-top:0.8rem;font-family:'Montserrat',sans-serif;font-weight:500;font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:#F7F8F5;background:var(--forest);border:none;padding:1.15rem;cursor:pointer;transition:all 0.4s;}
         .submit-btn:hover{background:var(--deep);box-shadow:0 8px 30px rgba(47,74,59,0.28);}
         .submit-btn:disabled{opacity:0.5;cursor:not-allowed;box-shadow:none;}
+        .field-hint{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.55;margin:-0.1rem 0 0.6rem;}
+        .fi-names{resize:vertical;min-height:96px;line-height:1.5;font-family:'Cormorant Garamond',serif;}
         .form-note{font-size:0.72rem;font-weight:300;color:var(--muted);margin-top:1.2rem;line-height:1.6;}
         .success-card{text-align:center;padding:2.5rem 1rem;animation:fadeInUp 0.6s ease;}
         .success-orn{display:block;width:120px;height:20px;margin:0 auto 1.4rem;color:var(--gold);}
@@ -375,8 +377,10 @@ export default function App() {
                 <p className="form-sub">Vai ser muito bom ter você lá</p>
                 <p className="form-deadline">Confirme até 20 de novembro</p>
                 <div className="fg">
-                  <label className="fl" htmlFor="rsvp-name">Nome completo</label>
-                  <input id="rsvp-name" className="fi" type="text" autoComplete="name" placeholder="Seu nome"
+                  <label className="fl" htmlFor="rsvp-name">Nome de quem vai</label>
+                  <p className="field-hint">Escreva o seu nome completo e o dos seus acompanhantes, tudo junto aqui.</p>
+                  <textarea id="rsvp-name" className="fi fi-names" rows={3} autoComplete="name"
+                    placeholder={"Ex.: Maria Souza e João Souza"}
                     value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 <div className="fg">
@@ -387,7 +391,7 @@ export default function App() {
                 <button className="submit-btn" onClick={handleSubmit} disabled={!name.trim() || sending}>
                   {sending ? "Enviando..." : "Confirmar presença"}
                 </button>
-                <p className="form-note">O convite é individual. Cada convidado confirma com o próprio nome.</p>
+                <p className="form-note">Vai com mais alguém? Basta colocar todos os nomes na mesma caixa. Não precisa confirmar de novo para cada pessoa.</p>
               </div>
             ) : (
               <div className="success-card">
