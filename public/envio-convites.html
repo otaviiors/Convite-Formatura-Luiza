@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2F4A3B">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Envio de Convites · Formatura Luiza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#2F4A3B; --forest:#3D5A49; --sage:#6F8C79; --mist:#E6ECE4; --paper:#F7F8F5;
+    --gold:#B08C52; --gold-l:#D3B98A; --ink:#26302A; --muted:#66716A; --line:#D5DDD2;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--paper); color:var(--ink); font-family:'Montserrat',sans-serif; font-weight:300; min-height:100vh; font-variant-numeric:lining-nums; }
+  .app { max-width:680px; margin:0 auto; padding:0 1.25rem 4rem; }
+
+  .header { text-align:center; padding:3rem 0 2.5rem; }
+  .orn { display:block; width:130px; height:20px; margin:0 auto 1.2rem; color:var(--gold); }
+  .header h1 { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:2.3rem; color:var(--ink); line-height:1.1; }
+  .header h1 em { color:var(--forest); font-style:italic; }
+  .header p { font-size:0.65rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-top:0.7rem; }
+
+  .how { background:var(--mist); padding:1.1rem 1.2rem; margin-bottom:2.2rem; font-size:0.85rem; line-height:1.7; color:#3E4A43; }
+  .how ol { padding-left:1.2rem; }
+
+  .section { margin-bottom:2.2rem; }
+  .section-title { font-size:0.6rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem; font-weight:500; }
+  textarea { width:100%; background:#fff; border:1px solid var(--line); color:var(--ink); font-family:'Montserrat',sans-serif; font-size:0.9rem; font-weight:400; padding:1rem; line-height:1.7; resize:vertical; outline:none; border-radius:0; transition:border-color .3s, box-shadow .3s; }
+  textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(176,140,82,0.12); }
+  #template { min-height:300px; }
+  #guests { min-height:200px; }
+  .hint { font-size:0.75rem; color:var(--muted); margin-top:0.5rem; line-height:1.6; }
+  .hint code { background:rgba(176,140,82,0.14); color:#8A6A35; padding:0.1rem 0.4rem; font-size:0.78rem; }
+
+  .gen-btn { display:block; width:100%; font-family:'Montserrat',sans-serif; font-weight:500; font-size:0.68rem; letter-spacing:5px; text-transform:uppercase; color:#F7F8F5; background:var(--forest); border:none; padding:1.15rem; cursor:pointer; transition:all .3s; }
+  .gen-btn:hover { background:var(--deep); box-shadow:0 8px 30px rgba(47,74,59,0.25); }
+  .gen-btn:focus-visible, .btn-wa:focus-visible, .btn-copy:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+  .error { color:#9A4A3A; font-size:0.8rem; margin-top:0.8rem; min-height:1.2em; text-align:center; }
+
+  .results { margin-top:2.5rem; }
+  .progress { text-align:center; margin-bottom:1.5rem; }
+  .progress strong { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:400; color:var(--forest); display:block; }
+  .progress span { font-size:0.62rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+  .bar { height:3px; background:var(--line); margin-top:0.9rem; }
+  .bar i { display:block; height:3px; background:var(--gold); width:0; transition:width .4s; }
+
+  .card { background:#fff; border:1px solid var(--line); padding:1.1rem 1.2rem; margin-bottom:0.8rem; display:flex; gap:1rem; align-items:center; justify-content:space-between; transition:opacity .3s, border-color .3s; }
+  .card.sent { opacity:0.55; }
+  .card-name { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:500; color:var(--ink); }
+  .card-status { font-size:0.68rem; color:var(--muted); margin-top:0.15rem; }
+  .card.sent .card-status { color:var(--forest); }
+  .actions { display:flex; gap:0.5rem; flex-shrink:0; }
+  .btn-wa { display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; background:#25D366; color:#fff; font-family:'Montserrat',sans-serif; font-size:0.62rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; padding:0.75rem 1rem; border:none; cursor:pointer; white-space:nowrap; }
+  .btn-wa:hover { background:#1DA851; }
+  .btn-copy { background:transparent; border:1px solid var(--line); color:var(--muted); font-family:'Montserrat',sans-serif; font-size:0.62rem; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:0.75rem 0.9rem; cursor:pointer; white-space:nowrap; }
+  .btn-copy:hover { border-color:var(--sage); color:var(--forest); }
+  .reset { display:block; margin:1.5rem auto 0; background:none; border:none; font-family:'Montserrat',sans-serif; font-size:0.7rem; color:var(--muted); text-decoration:underline; cursor:pointer; }
+
+  @media (max-width:520px){
+    .card { flex-direction:column; align-items:stretch; }
+    .actions { width:100%; }
+    .btn-wa { flex:1; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <svg class="orn" viewBox="0 0 160 24" aria-hidden="true"><line x1="0" y1="12" x2="62" y2="12" stroke="currentColor" stroke-width="0.8"/><line x1="98" y1="12" x2="160" y2="12" stroke="currentColor" stroke-width="0.8"/><path d="M80 2 L88 12 L80 22 L72 12 Z" fill="none" stroke="currentColor" stroke-width="0.9"/><circle cx="80" cy="12" r="2" fill="currentColor"/><circle cx="66" cy="12" r="1.2" fill="currentColor"/><circle cx="94" cy="12" r="1.2" fill="currentColor"/></svg>
+    <h1>Envio de <em>convites</em></h1>
+    <p>Formatura Luiza Shansis Tarta</p>
+  </div>
+
+  <div class="how">
+    <ol>
+      <li>Ajuste a mensagem se quiser. Onde estiver <code>{nome}</code>, entra o nome de cada convidado.</li>
+      <li>Cole a lista de convidados, um nome por linha.</li>
+      <li>Toque em "Enviar no WhatsApp", escolha o contato e envie. O convidado fica marcado como enviado.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Mensagem</p>
+    <textarea id="template">Oi, {nome}! 🎓✨
+
+Depois de 6 anos de muita dedicação, chegou a hora de comemorar: vou me formar em Medicina e quero muito você comigo nessa noite!
+
+📅 Sexta-feira, 11 de dezembro de 2026
+🕗 A partir das 20h
+📍 Clube de Caça e Pesca de Pelotas · Salão Tiro ao Prato
+
+Meu convite, com todos os detalhes e a confirmação de presença, está aqui:
+👉 https://convite-formatura-luiza.vercel.app
+
+Confirma até 20 de novembro, tá? Te espero lá! 🥂</textarea>
+    <p class="hint">A mensagem fica salva neste aparelho. Use <code>{nome}</code> para o nome do convidado.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Convidados</p>
+    <textarea id="guests" placeholder="Um nome por linha. Exemplo:
+Tia Regina
+Vô Paulo
+Júlia"></textarea>
+    <p class="hint">Use o nome do jeito que você chama a pessoa, porque é ele que vai na mensagem. Linhas em branco são ignoradas.</p>
+  </div>
+
+  <button class="gen-btn" id="generateBtn" type="button">Preparar mensagens</button>
+  <p class="error" id="error" role="status"></p>
+
+  <div class="results" id="results"></div>
+</div>
+
+<script>
+(function(){
+  var KEY = "envio-luiza-v1";
+  var tpl = document.getElementById("template");
+  var guestsEl = document.getElementById("guests");
+  var results = document.getElementById("results");
+  var errorEl = document.getElementById("error");
+  var state = { template: tpl.value, guests: "", sent: {} };
+
+  function load(){
+    try{
+      var s = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (s) { state = Object.assign(state, s); tpl.value = state.template; guestsEl.value = state.guests; }
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+  function names(){
+    var seen = {};
+    return guestsEl.value.split("\n").map(function(g){ return g.trim(); })
+      .filter(function(g){ if (!g || seen[g.toLowerCase()]) return false; seen[g.toLowerCase()] = 1; return true; });
+  }
+  function msgFor(n){ return tpl.value.replace(/\{nome\}/g, n); }
+
+  function render(){
+    var list = names();
+    results.textContent = "";
+    if (!list.length) return;
+    var sentCount = list.filter(function(n){ return state.sent[n]; }).length;
+
+    var prog = document.createElement("div"); prog.className = "progress";
+    var st = document.createElement("strong"); st.textContent = sentCount + " de " + list.length;
+    var sp = document.createElement("span"); sp.textContent = "convites enviados";
+    var bar = document.createElement("div"); bar.className = "bar";
+    var fill = document.createElement("i"); fill.style.width = (100 * sentCount / list.length) + "%";
+    bar.appendChild(fill); prog.appendChild(st); prog.appendChild(sp); prog.appendChild(bar);
+    results.appendChild(prog);
+
+    list.forEach(function(n){
+      var card = document.createElement("div"); card.className = "card" + (state.sent[n] ? " sent" : "");
+      var info = document.createElement("div");
+      var nm = document.createElement("p"); nm.className = "card-name"; nm.textContent = n;
+      var status = document.createElement("p"); status.className = "card-status";
+      status.textContent = state.sent[n] ? "Enviado ✓" : "Ainda não enviado";
+      info.appendChild(nm); info.appendChild(status);
+
+      var actions = document.createElement("div"); actions.className = "actions";
+      var wa = document.createElement("a"); wa.className = "btn-wa"; wa.target = "_blank"; wa.rel = "noopener";
+      wa.href = "https://wa.me/?text=" + encodeURIComponent(msgFor(n));
+      wa.textContent = state.sent[n] ? "Enviar de novo" : "Enviar no WhatsApp";
+      wa.addEventListener("click", function(){
+        state.sent[n] = true; save();
+        setTimeout(render, 400);
+      });
+      var cp = document.createElement("button"); cp.type = "button"; cp.className = "btn-copy"; cp.textContent = "Copiar";
+      cp.addEventListener("click", function(){
+        var text = msgFor(n);
+        var ok = function(){ cp.textContent = "Copiada ✓"; setTimeout(function(){ cp.textContent = "Copiar"; }, 1800); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok, function(){ window.prompt("Copie a mensagem:", text); });
+        } else { window.prompt("Copie a mensagem:", text); }
+      });
+      actions.appendChild(wa); actions.appendChild(cp);
+      card.appendChild(info); card.appendChild(actions);
+      results.appendChild(card);
+    });
+
+    var reset = document.createElement("button"); reset.type = "button"; reset.className = "reset";
+    reset.textContent = "Desmarcar todos os enviados";
+    reset.addEventListener("click", function(){
+      if (confirm("Desmarcar todos os convidados como enviados?")) { state.sent = {}; save(); render(); }
+    });
+    results.appendChild(reset);
+  }
+
+  document.getElementById("generateBtn").addEventListener("click", function(){
+    errorEl.textContent = "";
+    if (!tpl.value.trim()) { errorEl.textContent = "Escreva a mensagem."; return; }
+    if (tpl.value.indexOf("{nome}") === -1) { errorEl.textContent = "A mensagem precisa ter {nome} para colocar o nome de cada convidado."; return; }
+    if (!names().length) { errorEl.textContent = "Cole a lista de convidados, um nome por linha."; return; }
+    render();
+    results.scrollIntoView({ behavior: "smooth" });
+  });
+  tpl.addEventListener("input", function(){ state.template = tpl.value; save(); });
+  guestsEl.addEventListener("input", function(){ state.guests = guestsEl.value; save(); });
+
+  load();
+  if (names().length) render();
+})();
+</script>
+</body>
+</html>
