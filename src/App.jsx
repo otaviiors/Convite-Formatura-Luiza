@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
    Enquanto estiver vazia, o convite funciona, mas não envia
    as confirmações para a planilha.
    ═══════════════════════════════════════════════════════════════ */
-const SCRIPT_URL = "";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwV5gOfNYcE0AF1aX7JGj7W6TiDKeagtOl6qGgxIU_jnJyZLW6ZAZLXfujDhGCyEIkZhA/exec";
 
 const STORAGE_KEY = "rsvp-list-luiza";
 
