@@ -291,6 +291,9 @@ export default function App() {
         .footer-orn{width:60px;margin:0 auto 1.2rem;color:var(--gold);opacity:0.7;}
         .footer-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--forest);}
         .footer-sub{font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:0.4rem;}
+        .credit{display:inline-block;margin-top:2.4rem;font-size:0.62rem;font-weight:300;color:#8C968F;text-decoration:none;letter-spacing:0.3px;}
+        .credit span{border-bottom:1px solid currentColor;}
+        .credit:hover{color:var(--forest);}
 
         @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
         @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1);}50%{opacity:0.85;transform:scaleY(1.2);}}
@@ -475,6 +478,7 @@ export default function App() {
           <Ornament className="footer-orn" />
           <p className="footer-name">Luiza Shansis Tarta</p>
           <p className="footer-sub">Medicina · UCPel · 2026</p>
+          <a className="credit" href="https://otaviosantos.vercel.app/?de=luiza" target="_blank" rel="noopener noreferrer">Convite digital por Otávio Santos · <span>Quero um assim</span></a>
         </footer>
       </div>
     </>
