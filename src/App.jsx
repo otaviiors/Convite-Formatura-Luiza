@@ -478,7 +478,7 @@ export default function App() {
           <Ornament className="footer-orn" />
           <p className="footer-name">Luiza Shansis Tarta</p>
           <p className="footer-sub">Medicina · UCPel · 2026</p>
-          <a className="credit" href="https://otaviosantos.vercel.app/?de=luiza" target="_blank" rel="noopener noreferrer">Convite digital por Otávio Santos · <span>Quero um assim</span></a>
+          <a className="credit" href="https://otaviosantos-site.vercel.app/?de=luiza" target="_blank" rel="noopener noreferrer">Convite digital por Otávio Santos · <span>Quero um assim</span></a>
         </footer>
       </div>
     </>
