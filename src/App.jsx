@@ -11,6 +11,11 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwV5gOfNYcE0AF1aX7JG
 const STORAGE_KEY = "rsvp-list-luiza";
 
 const IMG_HERO = "/luiza-hero.jpg";
+const GALLERY = [
+  { src: "/luiza-jaleco.jpg", alt: "Luiza de jaleco com o estetoscópio", tall: true },
+  { src: "/luiza-beca.jpg", alt: "Luiza de beca" },
+  { src: "/luiza-beca-cachorro.jpg", alt: "Luiza de beca com seu cachorro" },
+];
 
 const EVENT = {
   calendarUrl:
@@ -59,18 +64,9 @@ function useParallax(speed = 0.3) {
   return [ref, offset];
 }
 
-/* ─── Ornamento dourado (substitui o monograma) ─── */
+/* ─── Linha dourada (separador) ─── */
 function Ornament({ className = "", onClick }) {
-  return (
-    <svg className={className} onClick={onClick} viewBox="0 0 160 24" aria-hidden="true">
-      <line x1="0" y1="12" x2="62" y2="12" stroke="currentColor" strokeWidth="0.8" />
-      <line x1="98" y1="12" x2="160" y2="12" stroke="currentColor" strokeWidth="0.8" />
-      <path d="M80 2 L88 12 L80 22 L72 12 Z" fill="none" stroke="currentColor" strokeWidth="0.9" />
-      <circle cx="80" cy="12" r="2" fill="currentColor" />
-      <circle cx="66" cy="12" r="1.2" fill="currentColor" />
-      <circle cx="94" cy="12" r="1.2" fill="currentColor" />
-    </svg>
-  );
+  return <div className={`gold-line ${className}`} onClick={onClick} aria-hidden="true" />;
 }
 
 export default function App() {
@@ -86,6 +82,7 @@ export default function App() {
   const formRef = useRef(null);
 
   const [introRef, introVis] = useReveal(0.2);
+  const [galleryRef, galleryVis] = useReveal(0.1);
   const [detailsRef, detailsVis] = useReveal(0.15);
   const [formRevRef, formVis] = useReveal(0.1);
   const [heroParRef, heroParOff] = useParallax(0.25);
@@ -183,11 +180,12 @@ export default function App() {
           background:radial-gradient(120% 80% at 50% 20%,#5E7D69 0%,#3D5A49 45%,#22372B 100%);}
         .hero-bg{position:absolute;inset:-6% 0;background-size:cover;background-position:center 22%;opacity:0;transition:opacity 1.8s ease;filter:brightness(0.6) contrast(1.05) saturate(0.95);}
         .hero-bg.loaded{opacity:1;}
-        .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(34,55,43,0.35) 0%,rgba(34,55,43,0.1) 40%,rgba(28,46,36,0.75) 100%);}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(34,55,43,0.3) 0%,rgba(34,55,43,0.05) 32%,rgba(26,42,33,0.72) 55%,rgba(24,38,30,0.88) 100%);}
         .hero-grain{position:absolute;inset:0;opacity:0.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
         .hero-content{position:relative;z-index:2;text-align:center;padding:2rem 1.5rem 7rem;}
         .hero-pretitle{font-weight:400;font-size:0.65rem;letter-spacing:7px;text-transform:uppercase;color:var(--gold-l);margin-bottom:1.6rem;opacity:0;transform:translateY(20px);transition:all 1s ease 0.5s;}
-        .hero-ornament{display:block;width:150px;height:22px;margin:0 auto 1.4rem;color:var(--gold-l);opacity:0;transform:scaleX(0.4);transition:all 1s cubic-bezier(0.22,1,0.36,1) 0.7s;cursor:default;-webkit-tap-highlight-color:transparent;}
+        .gold-line{display:block;height:1px;background:currentColor;}
+        .hero-ornament{width:60px;margin:0.4rem auto 2rem;color:var(--gold-l);opacity:0;transform:scaleX(0.4);transition:all 1s cubic-bezier(0.22,1,0.36,1) 0.7s;cursor:default;-webkit-tap-highlight-color:transparent;}
         .hero-name{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3rem,12vw,5.6rem);color:#F7F8F5;line-height:1.02;opacity:0;transform:translateY(30px);transition:all 1.2s cubic-bezier(0.22,1,0.36,1) 0.85s;text-shadow:0 2px 40px rgba(0,0,0,0.3);}
         .hero-name em{font-style:italic;font-weight:400;display:block;font-size:0.52em;color:#DCE4DA;margin-top:0.35rem;letter-spacing:0.02em;}
         .hero-degree{font-weight:300;font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;color:rgba(247,248,245,0.7);margin-top:1.1rem;opacity:0;transition:all 1s ease 1.1s;}
@@ -208,10 +206,20 @@ export default function App() {
         .intro-text strong{color:var(--forest);font-weight:600;}
         .intro-sign{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:var(--forest);margin-top:2rem;}
 
+        /* ── GALLERY ── */
+        .gallery{padding:1rem 1.25rem 6rem;background:linear-gradient(180deg,var(--paper),var(--mist));}
+        .gallery-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+        .gallery-item{position:relative;overflow:hidden;background:var(--mist);}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:transform 6s cubic-bezier(0.22,1,0.36,1);}
+        .gallery-item:hover img{transform:scale(1.04);}
+        .gallery-item.tall{grid-row:1/3;}
+        .gallery-item.tall img{object-position:25% 20%;}
+        .gallery-item:not(.tall){aspect-ratio:4/5;}
+
         /* ── QUOTE ── */
         .quote-section{padding:5.5rem 2rem;background:var(--forest);text-align:center;position:relative;overflow:hidden;}
         .quote-section::before{content:'';position:absolute;inset:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-        .quote-orn{display:block;width:110px;height:18px;margin:0 auto 1.8rem;color:var(--gold-l);opacity:0.8;}
+        .quote-orn{width:60px;margin:0 auto 1.8rem;color:var(--gold-l);opacity:0.8;}
         .quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.35rem,3.2vw,1.85rem);font-weight:300;font-style:italic;color:#E2E9E0;line-height:1.75;max-width:600px;margin:0 auto;position:relative;z-index:1;}
         .quote-attr{font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold-l);margin-top:1.5rem;position:relative;z-index:1;}
 
@@ -231,6 +239,19 @@ export default function App() {
         .action-btn{display:inline-block;margin-top:1.2rem;font-size:0.58rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--forest);text-decoration:none;border:1px solid var(--sage);padding:0.7rem 1.2rem;transition:all 0.4s ease;cursor:pointer;}
         .action-btn:hover{background:var(--forest);border-color:var(--forest);color:#F7F8F5;}
 
+        /* ── CERIMONIAL ── */
+        .help{padding:5rem 1.75rem;background:var(--forest);text-align:center;color:#E2E9E0;}
+        .help h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.1rem;color:#F7F8F5;}
+        .help-sub{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-l);margin-top:0.5rem;}
+        .help-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;line-height:1.8;max-width:440px;margin:1.6rem auto 0;}
+        .help-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:500;color:#F7F8F5;margin-top:1.6rem;}
+        .help-name span{font-style:italic;font-weight:400;color:#DCE4DA;}
+        .help-btn{display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.4rem;font-size:0.62rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#F7F8F5;text-decoration:none;border:1px solid rgba(211,185,138,0.6);padding:0.95rem 1.6rem;transition:all .4s ease;}
+        .help-btn:hover{background:rgba(211,185,138,0.14);border-color:var(--gold-l);}
+        .help-btn:focus-visible{outline:2px solid var(--gold-l);outline-offset:3px;}
+        .help-btn svg{width:16px;height:16px;}
+        .help-handle{font-size:0.75rem;color:#B9C8BD;margin-top:0.8rem;}
+
         /* ── FORM ── */
         .form-section{padding:6rem 1.75rem;background:linear-gradient(175deg,var(--mist),var(--paper));position:relative;overflow:hidden;}
         .form-container{max-width:460px;margin:0 auto;text-align:center;}
@@ -249,7 +270,7 @@ export default function App() {
         .fi-names{resize:vertical;min-height:96px;line-height:1.5;font-family:'Cormorant Garamond',serif;}
         .form-note{font-size:0.72rem;font-weight:300;color:var(--muted);margin-top:1.2rem;line-height:1.6;}
         .success-card{text-align:center;padding:2.5rem 1rem;animation:fadeInUp 0.6s ease;}
-        .success-orn{display:block;width:120px;height:20px;margin:0 auto 1.4rem;color:var(--gold);}
+        .success-orn{width:60px;margin:0 auto 1.4rem;color:var(--gold);}
         .success-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:2rem;color:var(--forest);margin-bottom:0.6rem;}
         .success-text{font-weight:300;font-size:0.88rem;color:var(--muted);line-height:1.75;}
 
@@ -267,7 +288,7 @@ export default function App() {
 
         /* ── FOOTER ── */
         .footer{text-align:center;padding:3.5rem 2rem 3rem;background:var(--paper);}
-        .footer-orn{display:block;width:120px;height:20px;margin:0 auto 1rem;color:var(--gold);opacity:0.7;}
+        .footer-orn{width:60px;margin:0 auto 1.2rem;color:var(--gold);opacity:0.7;}
         .footer-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--forest);}
         .footer-sub{font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:0.4rem;}
 
@@ -276,7 +297,12 @@ export default function App() {
 
         @media(max-width:700px){
           .details-grid{grid-template-columns:1fr;gap:1.2rem;}
+          .gallery-grid{grid-template-columns:1fr;}
+          .gallery-item.tall{grid-row:auto;}
+          .gallery-item,.gallery-item:not(.tall){aspect-ratio:2/3;}
           .quote-section{padding:4.5rem 1.5rem;}
+          .hero-content{padding-bottom:5rem;}
+          .hero-scroll{bottom:1.2rem;}
         }
         @media(min-width:1024px){
           .hero{align-items:center;justify-content:flex-end;}
@@ -301,7 +327,7 @@ export default function App() {
           <div className="hero-overlay" />
           <div className="hero-grain" />
           <div className="hero-content">
-            <p className={`hero-pretitle ${heroLoaded ? "show" : ""}`}>Convite Especial</p>
+            <p className={`hero-pretitle ${heroLoaded ? "show" : ""}`}>Convite de Formatura</p>
             <Ornament className={`hero-ornament ${heroLoaded ? "show" : ""}`} onClick={handleOrnamentClick} />
             <h1 className={`hero-name ${heroLoaded ? "show" : ""}`}>
               Luiza<em>Shansis Tarta</em>
@@ -327,6 +353,17 @@ export default function App() {
               pessoas especiais. Espero você para tornar essa noite ainda mais especial.
             </p>
             <p className="intro-sign">Luiza</p>
+          </div>
+        </section>
+
+        {/* ═══ GALERIA ═══ */}
+        <section className="gallery" ref={galleryRef}>
+          <div className="gallery-grid">
+            {GALLERY.map((g, i) => (
+              <div key={g.src} className={`gallery-item ${g.tall ? "tall" : ""}`} style={revealStyle(galleryVis, i * 0.2)}>
+                <img src={g.src} alt={g.alt} loading="lazy" />
+              </div>
+            ))}
           </div>
         </section>
 
@@ -360,13 +397,16 @@ export default function App() {
               <IconPin />
               <p className="detail-label">Local</p>
               <p className="detail-value">Clube de Caça e Pesca<br />de Pelotas</p>
-              <p className="detail-sub">Salão Tiro ao Prato<br />Av. Adolfo Fetter, 400 · Laranjal</p>
+              <p className="detail-sub">Salão Tiro ao Prato<br />Av. Adolfo Fetter, 400 · Laranjal<br />Pelotas - RS</p>
               <a href={EVENT.mapsUrl} target="_blank" rel="noopener noreferrer" className="action-btn">
                 Como chegar
               </a>
             </div>
           </div>
         </section>
+
+        {/* ═══ CERIMONIAL ═══ */}
+        <HelpSection />
 
         {/* ═══ FORM ═══ */}
         <section className="form-section" ref={formRef}>
@@ -375,10 +415,10 @@ export default function App() {
               <div style={revealStyle(formVis, 0)}>
                 <h2 className="form-title">Confirme sua presença</h2>
                 <p className="form-sub">Vai ser muito bom ter você lá</p>
-                <p className="form-deadline">Confirme até 20 de novembro</p>
+                <p className="form-deadline">RSVP até 20 de novembro</p>
                 <div className="fg">
-                  <label className="fl" htmlFor="rsvp-name">Nome de quem vai</label>
-                  <p className="field-hint">Escreva o seu nome completo e o dos seus acompanhantes, tudo junto aqui.</p>
+                  <label className="fl" htmlFor="rsvp-name">Nome completo</label>
+                  <p className="field-hint">Se o seu convite incluiu mais alguém, coloque os nomes juntos aqui.</p>
                   <textarea id="rsvp-name" className="fi fi-names" rows={3} autoComplete="name"
                     placeholder={"Ex.: Maria Souza e João Souza"}
                     value={name} onChange={e => setName(e.target.value)} />
@@ -391,7 +431,6 @@ export default function App() {
                 <button className="submit-btn" onClick={handleSubmit} disabled={!name.trim() || sending}>
                   {sending ? "Enviando..." : "Confirmar presença"}
                 </button>
-                <p className="form-note">Vai com mais alguém? Basta colocar todos os nomes na mesma caixa. Não precisa confirmar de novo para cada pessoa.</p>
               </div>
             ) : (
               <div className="success-card">
@@ -477,5 +516,27 @@ function IconPin() {
       <path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z" />
       <circle cx="12" cy="10" r="2.3" />
     </svg>
+  );
+}
+
+/* ── Cerimonial (contato pelo Instagram) ── */
+function HelpSection() {
+  const [ref, vis] = useReveal(0.15);
+  return (
+    <section className="help" ref={ref}>
+      <div style={{ opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(40px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1)" }}>
+        <h2>Vem de fora?</h2>
+        <p className="help-sub">Dúvidas e dicas</p>
+        <p className="help-text">Hospedagem, salão de beleza e outras dúvidas sobre a festa: fale com o cerimonial.</p>
+        <p className="help-name">PAUSA <span>· Especialista em Casamentos</span></p>
+        <a className="help-btn" href="https://www.instagram.com/pausaespecialistaemcasamentos/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none" />
+          </svg>
+          Falar no Instagram
+        </a>
+        <p className="help-handle">@pausaespecialistaemcasamentos</p>
+      </div>
+    </section>
   );
 }
