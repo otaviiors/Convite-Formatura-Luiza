@@ -351,7 +351,7 @@ export default function App() {
         <section className="intro" ref={introRef}>
           <div style={revealStyle(introVis, 0.1)}>
             <p className="intro-text">
-              É com muita alegria que convido você para celebrar comigo a minha formatura em <strong>Medicina</strong>.
+              É com muita alegria que convido você para celebrar comigo a minha formatura em Medicina.
               Depois de 6 anos de dedicação e aprendizado, chegou o momento de comemorar essa conquista ao lado de
               pessoas especiais. Espero você para tornar essa noite ainda mais especial.
             </p>
@@ -491,8 +491,8 @@ function QuoteReveal() {
   return (
     <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(40px)", transition: "all 1.2s cubic-bezier(0.22,1,0.36,1)" }}>
       <Ornament className="quote-orn" />
-      <p className="quote-text">"Curar quando possível, aliviar quando necessário, consolar sempre."</p>
-      <p className="quote-attr">— Máxima da Medicina</p>
+      <p className="quote-text">"Conheça todas as teorias, domine todas as técnicas, mas ao tocar uma alma humana, seja apenas outra alma humana."</p>
+      <p className="quote-attr">— Carl Jung</p>
     </div>
   );
 }
