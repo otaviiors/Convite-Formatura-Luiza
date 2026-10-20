@@ -378,7 +378,7 @@ export default function App() {
         {/* ═══ DETAILS ═══ */}
         <section className="details" ref={detailsRef}>
           <div className="section-title" style={revealStyle(detailsVis, 0)}>
-            <h2>Detalhes da Festa</h2>
+            <h2>Detalhes da FESTA</h2>
             <p>Informações para a noite</p>
           </div>
           <div className="details-grid">
@@ -418,7 +418,7 @@ export default function App() {
               <div style={revealStyle(formVis, 0)}>
                 <h2 className="form-title">Confirme sua presença</h2>
                 <p className="form-sub">Vai ser muito bom ter você lá</p>
-                <p className="form-deadline">RSVP até 20 de novembro</p>
+                <p className="form-deadline">Confirme até 20 de novembro</p>
                 <div className="fg">
                   <label className="fl" htmlFor="rsvp-name">Nome completo</label>
                   <p className="field-hint">Se o seu convite incluiu mais alguém, coloque os nomes juntos aqui.</p>
@@ -532,7 +532,6 @@ function HelpSection() {
         <h2>Vem de fora?</h2>
         <p className="help-sub">Dúvidas e dicas</p>
         <p className="help-text">Hospedagem, salão de beleza e outras dúvidas sobre a festa: fale com o cerimonial.</p>
-        <p className="help-name">PAUSA <span>· Especialista em Casamentos</span></p>
         <a className="help-btn" href="https://www.instagram.com/pausaespecialistaemcasamentos/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none" />
