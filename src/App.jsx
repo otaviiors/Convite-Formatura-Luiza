@@ -378,7 +378,7 @@ export default function App() {
         {/* ═══ DETAILS ═══ */}
         <section className="details" ref={detailsRef}>
           <div className="section-title" style={revealStyle(detailsVis, 0)}>
-            <h2>Detalhes da FESTA</h2>
+            <h2>Detalhes da festa</h2>
             <p>Informações para a noite</p>
           </div>
           <div className="details-grid">
