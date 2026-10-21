@@ -239,6 +239,26 @@ export default function App() {
         .action-btn{display:inline-block;margin-top:1.2rem;font-size:0.58rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--forest);text-decoration:none;border:1px solid var(--sage);padding:0.7rem 1.2rem;transition:all 0.4s ease;cursor:pointer;}
         .action-btn:hover{background:var(--forest);border-color:var(--forest);color:#F7F8F5;}
 
+        /* ── COLAÇÃO AO VIVO ── */
+        .live{padding:5.5rem 1.75rem;background:var(--mist);text-align:center;position:relative;}
+        .live-box{max-width:520px;margin:0 auto;}
+        .live-badge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.6rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--forest);border:1px solid var(--sage-l);padding:0.45rem 0.9rem;border-radius:999px;margin-bottom:1.4rem;}
+        .live-dot{width:7px;height:7px;border-radius:50%;background:#C0392B;box-shadow:0 0 0 0 rgba(192,57,43,.5);animation:livePulse 2s infinite;}
+        @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.5);}70%{box-shadow:0 0 0 8px rgba(192,57,43,0);}100%{box-shadow:0 0 0 0 rgba(192,57,43,0);}}
+        .live h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.1rem;color:var(--ink);}
+        .live-when{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--ink);margin-top:1.2rem;}
+        .live-where{font-size:0.8rem;font-weight:300;color:var(--muted);margin-top:0.4rem;line-height:1.6;}
+        .live-text{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#4B554F;line-height:1.8;margin-top:1.4rem;}
+        .live-actions{display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-top:1.8rem;}
+        .live-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;max-width:300px;font-size:0.62rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;text-decoration:none;padding:1rem 1.6rem;transition:all .4s ease;}
+        .live-btn svg{width:16px;height:16px;}
+        .live-btn.primary{background:var(--forest);color:#F7F8F5;border:1px solid var(--forest);}
+        .live-btn.primary:hover{background:var(--deep);}
+        .live-btn.ghost{color:var(--forest);border:1px solid var(--sage);}
+        .live-btn.ghost:hover{background:var(--forest);color:#F7F8F5;border-color:var(--forest);}
+        .live-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+        .live-note{font-size:0.7rem;font-weight:300;color:var(--muted);margin-top:0.2rem;}
+
         /* ── CERIMONIAL ── */
         .help{padding:5rem 1.75rem;background:var(--forest);text-align:center;color:#E2E9E0;}
         .help h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.1rem;color:#F7F8F5;}
@@ -408,6 +428,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* ═══ COLAÇÃO AO VIVO ═══ */}
+        <LiveSection />
+
         {/* ═══ CERIMONIAL ═══ */}
         <HelpSection />
 
@@ -520,6 +543,33 @@ function IconPin() {
       <path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z" />
       <circle cx="12" cy="10" r="2.3" />
     </svg>
+  );
+}
+
+/* ── Colação de grau ao vivo ── */
+function LiveSection() {
+  const [ref, vis] = useReveal(0.15);
+  return (
+    <section className="live" ref={ref}>
+      <div className="live-box" style={{ opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(40px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1)" }}>
+        <span className="live-badge"><i className="live-dot" />Ao vivo</span>
+        <h2>Colação de grau</h2>
+        <p className="live-when">11 de dezembro, às 16h</p>
+        <p className="live-where">Centro de Eventos Fenadoce<br />Av. Pinheiro Machado, 3390 · Pelotas - RS</p>
+        <p className="live-text">Não vai poder estar lá? A cerimônia será transmitida ao vivo, e você pode acompanhar de onde estiver.</p>
+        <div className="live-actions">
+          <a className="live-btn primary" href="https://www.youtube.com/@guadalajaraformaturas/streams" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+            Assistir ao vivo
+          </a>
+          <a className="live-btn ghost" href="/colacao-luiza.ics" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5a2 2 0 0 0 4 0" /></svg>
+            Lembrar 15 min antes
+          </a>
+          <p className="live-note">Salva a colação no calendário do celular, com aviso 15 minutos antes.</p>
+        </div>
+      </div>
+    </section>
   );
 }
 

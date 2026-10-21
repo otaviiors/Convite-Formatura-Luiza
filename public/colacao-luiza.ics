@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Convite Luiza//PT-BR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:colacao-luiza-2026@convite
+DTSTAMP:20261021T120000Z
+DTSTART:20261211T190000Z
+DTEND:20261211T210000Z
+SUMMARY:Colação de grau da Luiza - ao vivo
+DESCRIPTION:Colação de grau de Luiza Shansis Tarta - Medicina UCPel.\nAssista ao vivo: https://www.youtube.com/@guadalajaraformaturas/streams
+LOCATION:Centro de Eventos Fenadoce\, Av. Pinheiro Machado\, 3390 - Pelotas - RS
+URL:https://www.youtube.com/@guadalajaraformaturas/streams
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:A colação da Luiza começa em 15 minutos. Abra o link para assistir ao vivo.
+END:VALARM
+END:VEVENT
+END:VCALENDAR
