@@ -547,6 +547,13 @@ function IconPin() {
 }
 
 /* ── Colação de grau ao vivo ── */
+const LIVE_CAL =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=Cola%C3%A7%C3%A3o+de+grau+da+Luiza+-+ao+vivo" +
+  "&dates=20261211T190000Z/20261211T210000Z" +
+  "&details=" + encodeURIComponent("Colação de grau de Luiza Shansis Tarta - Medicina UCPel.\nAssista ao vivo: https://www.youtube.com/@guadalajaraformaturas/streams") +
+  "&location=" + encodeURIComponent("Centro de Eventos Fenadoce, Av. Pinheiro Machado, 3390 - Pelotas - RS");
+
 function LiveSection() {
   const [ref, vis] = useReveal(0.15);
   return (
@@ -562,11 +569,11 @@ function LiveSection() {
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
             Assistir ao vivo
           </a>
-          <a className="live-btn ghost" href="/colacao-luiza.ics" download>
+          <a className="live-btn ghost" href={LIVE_CAL} target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5a2 2 0 0 0 4 0" /></svg>
-            Lembrar 15 min antes
+            Salvar no calendário
           </a>
-          <p className="live-note">Salva a colação no calendário do celular, com aviso 15 minutos antes.</p>
+          <p className="live-note">O calendário avisa antes de começar, com o link da transmissão.</p>
         </div>
       </div>
     </section>
