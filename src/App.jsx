@@ -563,7 +563,7 @@ function LiveSection() {
         <h2>Colação de grau</h2>
         <p className="live-when">11 de dezembro, às 16h</p>
         <p className="live-where">Centro de Eventos Fenadoce<br />Av. Pinheiro Machado, 3390 · Pelotas - RS</p>
-        <p className="live-text">A cerimônia será transmitida ao vivo, e você pode acompanhar de onde estiver.</p>
+        <p className="live-text">A cerimônia será transmitida ao vivo. Acompanhe de onde estiver.</p>
         <div className="live-actions">
           <a className="live-btn primary" href="https://www.youtube.com/@guadalajaraformaturas/streams" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
