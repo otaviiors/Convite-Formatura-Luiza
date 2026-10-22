@@ -552,7 +552,7 @@ const LIVE_CAL =
   "&text=Cola%C3%A7%C3%A3o+de+grau+da+Luiza+-+ao+vivo" +
   "&dates=20261211T190000Z/20261211T210000Z" +
   "&details=" + encodeURIComponent("Colação de grau de Luiza Shansis Tarta - Medicina UCPel.\nAssista ao vivo: https://www.youtube.com/@guadalajaraformaturas/streams") +
-  "&location=" + encodeURIComponent("Centro de Eventos Fenadoce, Av. Pinheiro Machado, 3390 - Pelotas - RS");
+  "&location=" + encodeURIComponent("Ao vivo no YouTube: https://www.youtube.com/@guadalajaraformaturas/streams");
 
 function LiveSection() {
   const [ref, vis] = useReveal(0.15);
@@ -562,7 +562,6 @@ function LiveSection() {
         <span className="live-badge"><i className="live-dot" />Ao vivo</span>
         <h2>Colação de grau</h2>
         <p className="live-when">11 de dezembro, às 16h</p>
-        <p className="live-where">Centro de Eventos Fenadoce<br />Av. Pinheiro Machado, 3390 · Pelotas - RS</p>
         <p className="live-text">A cerimônia será transmitida ao vivo. Acompanhe de onde estiver.</p>
         <div className="live-actions">
           <a className="live-btn primary" href="https://www.youtube.com/@guadalajaraformaturas/streams" target="_blank" rel="noopener noreferrer">
