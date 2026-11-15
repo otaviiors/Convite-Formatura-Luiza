@@ -441,7 +441,7 @@ export default function App() {
               <div style={revealStyle(formVis, 0)}>
                 <h2 className="form-title">Confirme sua presença</h2>
                 <p className="form-sub">Vai ser muito bom ter você lá</p>
-                <p className="form-deadline">Confirme até 20 de novembro</p>
+                <p className="form-deadline">Confirme até 1º de dezembro</p>
                 <div className="fg">
                   <label className="fl" htmlFor="rsvp-name">Nome completo</label>
                   <p className="field-hint">Se o seu convite incluiu mais alguém, coloque os nomes juntos aqui.</p>
